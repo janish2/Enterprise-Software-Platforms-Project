@@ -1,0 +1,74 @@
+TABLE CREATION DETAILS :
+
+Table Name : addsupplierpage
+SQL STATEMENT:
+CREATE TABLE `sim`.`addsupplierpage` (
+  `suppliername` varchar(30) DEFAULT NULL,
+  `emailaddress` varchar(30) DEFAULT NULL,
+  `legalstructure` varchar(30) DEFAULT NULL,
+  `commodity` varchar(30) DEFAULT NULL,
+  `website` varchar(50) DEFAULT NULL,
+  `location` varchar(30) DEFAULT NULL,
+  `addressline1` varchar(30) DEFAULT NULL,
+  `addressline2` varchar(30) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `postcode` varchar(30) DEFAULT NULL,
+  `country` varchar(30) DEFAULT NULL,
+  `state` varchar(30) DEFAULT NULL,
+  `supplierfirstname` varchar(30) DEFAULT NULL,
+  `supplierlastname` varchar(30) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `fax` varchar(30) DEFAULT NULL,
+  `primaryemail` varchar(30) DEFAULT NULL,
+  `addsupplierpage_id` int(11) NOT NULL AUTO_INCREMENT,
+  `approval` varchar(45) DEFAULT NULL,
+  `spent` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`addsupplierpage_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+
+Table Name : authenticate
+SQL STATEMENT:
+CREATE TABLE `sim`.`authenticate` (
+  `username` varchar(30) DEFAULT NULL,
+  `passwordd` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+Table Name : managerauthenticate
+SQL STATEMENT:
+CREATE TABLE `sim`.`managerauthenticate` (
+  `username` varchar(40) DEFAULT NULL,
+  `passwordd` varchar(30) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+Table Name : process
+SQL STATEMENT:
+CREATE TABLE `sim`.`process` (
+  `process_id` int(11) DEFAULT NULL,
+  `suppliername` varchar(40) DEFAULT NULL,
+  `process_type` varchar(30) DEFAULT NULL,
+  `process_status` varchar(40) DEFAULT NULL,
+  `process_auto_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status_fmanager` varchar(45) DEFAULT NULL,
+  `status_pmanager` varchar(45) DEFAULT NULL,
+  `username` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`process_auto_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+Table Name : suppliersignup
+SQL STATEMENT:
+CREATE TABLE `sim`.`suppliersignup` (
+  `firstname` varchar(25) DEFAULT NULL,
+  `lastname` varchar(30) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `username` varchar(45) DEFAULT NULL,
+  `passwordd` varchar(45) DEFAULT NULL,
+  `cpasswordd` varchar(45) DEFAULT NULL,
+  `company` varchar(45) DEFAULT NULL,
+  `supplier` varchar(45) DEFAULT NULL,
+  `supplier_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`supplier_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
