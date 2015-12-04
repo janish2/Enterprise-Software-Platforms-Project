@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://getbootstrap.com/examples/offcanvas/# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">  
+  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="/files/acumen.png"> -->
+
+    <title>Home Page</title>
+
+ 
+    
+   <style>
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+.logoutLblPos{
+
+   position:fixed;
+   right:10px;
+   top:5px;
+}
+
+</style>
+  </head>
+
+  <body>
+<div ng-app="MtaaS" data-ng-controller="MtaaS1">
+
+<form name="mainform">		
+			
+
+
+
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" ng-click = "home()">Acumen SIM</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a class="active"><ng-click="home()">Home</a></li>
+            <li><a href="#" ng-click="searchsupplier()">Search</a></li>
+            <li><a href="#" ng-click="processsupplier()">Process</a></li>
+              <li><a href="#" ng-click= "statistics()">View Stats</a></li>
+          </ul>
+           <label class="logoutLblPos">
+          <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+          </label>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+              <div ng-repeat = "a in loginusername"> 
+            <h1>Hello {{a.username}},</div></h1>
+            <p>Below List shows the Tasks which are pending with you at present. Please click the Supplier Name to approve or reject the supplier.</p>
+               
+           
+              <a class="btn btn-primary btn-lg" ng-click="addsupplier()" role="button">Add Supplier</a>
+              <a class="btn btn-primary btn-lg" ng-click="editsupplier()" role="button">Edit Supplier</a>
+              <a class="btn btn-primary btn-lg" ng-click="updatesupplier()" role="button">Update/Enable Supplier</a>
+          </div>
+          
+        </div><!--/.col-xs-12.col-sm-9-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <!--<div class="list-group">
+            <a href="home.html" class="list-group-item active">Home</a>
+            <a href="Search.html" class="list-group-item">Search</a>
+            <a href="Process.html" class="list-group-item">Process</a>
+            </div> -->
+        </div><!--/.sidebar-offcanvas-->
+      </div><!--/row-->
+
+
+
+    </div><!--/.container-->
+
+
+
+
+  <script>
+   var app=angular.module('MtaaS', []);
+ app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+ {
+
+	$http({
+ method: 'GET',
+ url: '/checklogin'
+ }).
+ then(function(response)
+ {
+ 	if(response.data.status===300)
+ 	{
+ 	$window.location.href='/';
+ 	}
+ });
+ 
+   
+   
+   
+  $scope.logoutsession= function () {
+ //alert("in logout session");
+ $http({
+ method: 'GET',
+ url: '/logoutsession'
+ }).
+then(function(response)
+ {
+ 	if(response.data.status===300)
+ 	{
+ 	console.log("destroy session");
+ 	}else
+ 	{
+ 	$window.location.href='/';
+ 	}
+ });
+ } 
+		 $http({
+			      	  method: 'GET',
+			      	  url: '/homeusernamef'
+			      	  
+			        }).
+			          then(function(response) {
+			         //alert(response.data.result);
+			         $scope.loginusername = angular.fromJson(response.data.result);
+
+			          });  
+		
+		 
+					   $scope.addsupplier = function (){
+			   $window.location.href = '/addsupplier';
+			}
+			  $scope.editsupplier = function (){
+			   $window.location.href = '/editsupplier';
+			}
+			  $scope.updatesupplier = function (){
+			   $window.location.href = '/updatesupplier';
+			}
+			 $scope.searchsupplier = function (){
+			   $window.location.href = '/searchsupplier';
+			}
+			 $scope.processsupplier = function (){
+			   $window.location.href = '/processsupplier_fmanager';
+			}
+                 $scope.statistics = function (){
+            $window.location.href = '/statistics';
+        }
+}]);
+</script>
+</body></html>
+
+/

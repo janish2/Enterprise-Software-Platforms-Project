@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<!-- Defining the Scripts Below -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">  
+<style>
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+.logoutLblPos{
+
+   position:fixed;
+   right:10px;
+   top:5px;
+}
+
+</style>
+
+ </head>
+
+  <body>
+  
+  
+  
+<div ng-app="MtaaS" data-ng-controller="MtaaS1">
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" ng-click = "home()">Acumen SIM</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#" ng-click = "home()">Home</a></li>
+            <li class="active"><a href="#" ng-click = "searchsupplier()">Search</a></li>
+            <li><a href="#" ng-click="processsupplier()">Process</a></li>
+          </ul>
+           <label class="logoutLblPos">
+          <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+          </label>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+              <h2 color="Red"><b>ADD SUPPLIER</b></h2>
+                  
+              <!--new code added here -->
+              <div class="container well" style="margin-top: 50px">
+			<form name="myForm">
+			  <p>Supplier Basic Information</p>
+				<a name="sbi"></a>
+			  <div class="form-group col-md-12">
+				<table style = width=30%">
+				
+				
+				<div class="form-group col-md-12">
+				<input class="form-control" type="text" placeholder="Supplier Name" name="suppliername" ng-model="suppliername">
+				</div>
+				<div class="form-group col-md-12">
+				<input class="form-control" type="email" placeholder="Supplier Email Address" name="supplieremail" ng-model="supplieremail">
+				</div>
+				<!--Check if Select List Works 
+				<tr>	
+					<td>Legal Structure </td>
+					<td><input type="text" name="legal" ng-model="legal"></td>
+					
+				</tr>
+				-->
+			
+			      <div class="form-group col-md-6">
+					<Select class="form-control" placeholder="Legal Structure" name="legal" >
+					<option value="null">Select Legal Structure</option>
+					<option value="Corporation">Corporation</option>
+					<option value="Government">Government</option>
+					<option value="Non Profit Organization">Non Profit Organization</option>
+					<option value="Individual">Individual</option>
+					<option value="Others">Others</option>
+					</select>
+				  </div>
+					<div class="form-group col-md-6">
+					<Select class="form-control" name="commodity" placeholder="Commodity" type="select"  >
+					<option value="null">Select Commodity</option>
+					<option value="Stationery">Stationery</option>
+					<option value="Engineering">Engineering</option>
+					<option value="Energy">Energy</option>
+					<option value="Direct">Direct</option>
+					<option value="Others">Others</option>
+					</select>
+				  </div>
+				  <div class="form-group col-md-12">
+					<input class="form-control" name="spent" ng-model="spent" placeholder="Estimated Annual Spent" type="text">
+				  </div>
+                    <div class="form-group col-md-12">
+					<input class="form-control" name="website" ng-model="website" placeholder="Company WebSite (URL)" type="text">
+				  </div>
+				  <div class="form-group col-md-9">
+					<Select class="form-control" name="glocation" placeholder="Supplier Geographical Location" type="select">
+					<option value="null">Select Geographical Location</option>
+					<option value="Africa">Africa</option>
+					<option value="Asia">Asia</option>
+					<option value="Caribbean">Caribbean</option>
+					<option value="Central America">Central America</option>
+					<option value="Eastern Europe">Eastern Europe</option>
+					<option value="European Union">European Union</option>
+					<option value="Middle East">Middle East</option>
+					<option value="North America">North America</option>
+					<option value="Oceania">Oceania</option>
+					<option value="South America">South America</option>
+					</select>
+				 </div>
+			<div class="clearfix">
+          
+			</div>
+			<p>Supplier Address Information</p>
+			
+			<div class="form-group col-md-12">
+				<input class="form-control" name="addressline1" ng-model="addressline1" placeholder="Address Line 1" type="text">
+			</div>
+			<div class="form-group col-md-12">
+			   <input class="form-control" name="addressline2" ng-model="addressline2" placeholder="Address Line 2" type="text">
+			</div>
+			<div class="form-group col-md-6">
+			   <input class="form-control" name="city" ng-model="city" placeholder="City" type="tel">
+			</div>
+
+			<div class="form-group col-md-6">
+			   <input class="form-control" name="postcode" ng-model="postcode" placeholder="Post Code" type="text">
+			</div>
+			<div class="form-group col-md-6">
+			   <input class="form-control" name="country" ng-model="country" placeholder="Country" type="text">
+			</div>
+			<div class="form-group col-md-6">
+			   <input class="form-control" name="state" ng-model="state" placeholder="State" type="text">
+			</div>
+			<div class="clearfix">
+          
+			</div>
+			<!-- Supplier Contact Information -->
+			<p>Supplier Primary Contact Information</p>
+			
+			
+			<div class="form-group col-md-6">
+        <input class="form-control" name="sfirstname" ng-model="sfirstname" placeholder="First Name" type="text">
+      </div>
+     <div class="form-group col-md-6">
+       <input class="form-control" name="slastname" ng-model="slastname" placeholder="Last Name" type="text">
+     </div>
+    <div class="form-group col-md-12">
+       <input class="form-control" name="phone" ng-model="phone" placeholder="Phone Number" type="tel">
+     </div>
+
+     <div class="form-group col-md-12">
+       <input class="form-control" name="fax" ng-model="fax" placeholder="Fax Number" type="text">
+     </div>
+     <div class="form-group col-md-12">
+       <input class="form-control" name="pemail" ng-model="pemail" placeholder="Primary Contact Email Address" type="text">
+     </div>
+	<!-- Supplier Contact Information Ends Here -->
+	<div class="form-group col-md-12">
+       <div class="checkbox">
+         <label>
+           <input id="terms" name="terms" type="checkbox"> 
+           I have read, consent and agree to Company's User Agreement and Privacy Policy
+           (including the processing and disclosing of my personal data), and I am of 
+           legal age.
+         </label>
+       </div>
+     </div>	
+	<input type="submit" name="Add Supplier"class="btn btn-success" ng-click="addsupplierdetails()">
+
+		</div>
+			
+			</form>
+			
+			</div>
+			</div>
+			</div>
+			</div></div></div>
+			</center>
+			
+			
+			
+				
+  
+<script type ='text/javascript'>	//javascript code
+
+var app=angular.module('MtaaS', [])
+
+ app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+ {
+
+	//alert("nitesh");
+	$scope.addsupplierdetails = function (){
+				var in_suppliername = $scope.suppliername;
+				var in_supplieremail = $scope.supplieremail;
+				var in_legal = $scope.legal;
+				var in_commodity = $scope.commodity;
+				var in_spent = $scope.spent;
+                var in_website=$scope.website;
+				var in_glocation=$scope.glocation;
+				var in_addressline1= $scope.addressline1;
+				var in_addressline2 = $scope.addressline1;
+				var in_city = $scope.city;
+				var in_postcode = $scope.postcode;
+				var in_country = $scope.country;
+				var in_state = $scope.state;
+				var in_sfirstname = $scope.sfirstname;
+				var in_slastname = $scope.slastname;
+				var in_phone=$scope.phone;
+				var in_fax=$scope.fax;
+				var in_pemail= $scope.pemail;                
+    /*
+                    if (in_suppliername == null || in_suppliername == "")
+	{
+		alert("Supplier Name cannot be empty");
+		return;
+	}
+                    if (in_supplieremail == null || in_supplieremail == "")
+	{
+		alert("Supplier Email cannot be empty");
+		return;
+	}
+   
+                                          if (in_commodity == null || in_commodity == "")
+	{
+		alert("Commodity cannot be empty");
+		return;
+	}
+                                          if (in_website == null || in_website == "")
+	{
+		alert("Please enter your website");
+		return;
+	}
+    
+                                          if (in_addressline1 == null || in_addressline1 == "")
+	{
+		alert("Address Line1 cannot be empty");
+		return;
+	}
+                                                                               if (in_city == null || in_city == "")
+	{
+		alert("Please enter your city");
+		return;
+	}
+                                          if (in_postcode == null || in_postcode == "")
+	{
+		alert("Please enter your postcode");
+		return;
+	}
+                                          if (in_country == null || in_country == "")
+	{
+		alert("Please enter your country");
+		return;
+	}
+                                          if (in_state == null || in_state == "")
+	{
+		alert("Please enter your state");
+		return;
+	}
+                                            if (in_sfirstname == null || in_sfirstname == "")
+	{
+		alert("Supplier First Name cannot be empty");
+		return;
+	}
+                                                                                  if (in_slastname == null || in_slastname == "")
+	{
+		alert("Supplier Last Name cannot be empty");
+		return;
+	}
+                                                                                  if (in_phone == null || in_phone == "")
+	{
+		alert("Phone cannot be empty");
+		return;
+	}
+                                                                                  if (in_fax == null || in_fax == "")
+	{
+		alert("Fax cannot be empty");
+		return;
+	}
+                                                                                    if (in_pemail == null || in_pemail == "")
+	{
+		alert("Primary Email cannot be empty");
+		return;
+	}
+      
+      */                                    
+				
+				
+				
+		$http({
+			  method: 'POST',
+			  url: '/addsupplierdetails',			  
+			  data: {"suppliername":in_suppliername,"supplieremail":in_supplieremail,"legal": in_legal,"commodity":in_commodity,"website":in_website,
+			   "glocation":in_glocation, "addressline1" : in_addressline1, "addressline2":in_addressline2,"city":in_city,"postcode":in_postcode,
+			   "country":in_country,"state":in_state,"sfirstname":in_sfirstname,"slastname":in_slastname,
+			   "phone":in_phone,"fax":in_fax,"pemail":in_pemail}
+			}).
+			  then(function(response) {
+				  $window.location.href = '/home';
+			  });
+	} 
+
+
+  $http({
+ method: 'GET',
+ url: '/checklogin'
+ }).
+ then(function(response)
+ {
+ 	if(response.data.status===300)
+ 	{
+ 	$window.location.href='/';
+ 	}
+ });
+ 
+   
+   
+   
+  $scope.logoutsession= function () {
+ //alert("in logout session");
+ $http({
+ method: 'GET',
+ url: '/logoutsession'
+ }).
+then(function(response)
+ {
+ 	if(response.data.status===300)
+ 	{
+ 	console.log("destroy session");
+ 	}else
+ 	{
+ 	$window.location.href='/';
+ 	}
+ });
+ } 
+                                  $scope.email=function(tester){
+		$http({
+			method:'POST',
+		    url:'/email'
+		}).success(function(response){
+			$window.location.href = '/developerproject';
+			alert("Manager is been notified");
+		});
+             };
+                                           
+                                           
+                                           
+                                           
+					   $scope.addsupplier = function (){
+			   $window.location.href = '/addsupplier';
+			}
+			  $scope.editsupplier = function (){
+			   $window.location.href = '/editsupplier';
+			}
+			  $scope.updatesupplier = function (){
+			   $window.location.href = '/updatesupplier';
+			}
+			 $scope.searchsupplier = function (){
+			   $window.location.href = '/searchsupplier';
+			}
+			 $scope.processsupplier = function (){
+			   $window.location.href = '/processsupplier';
+			}
+				   $scope.home = function (){
+			   $window.location.href = '/home';
+			}
+}]);
+
+</script></html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Defining the Scripts Below -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        html,
+        body {
+            overflow-x: hidden; /* Prevent scroll on narrow devices */
+        }
+        body {
+            padding-top: 70px;
+        }
+        footer {
+            padding: 30px 0;
+        }
+
+        @media screen and (max-width: 767px) {
+            .row-offcanvas {
+                position: relative;
+                -webkit-transition: all .25s ease-out;
+                -o-transition: all .25s ease-out;
+                transition: all .25s ease-out;
+            }
+
+            .row-offcanvas-right {
+                right: 0;
+            }
+
+            .row-offcanvas-left {
+                left: 0;
+            }
+
+            .row-offcanvas-right
+            .sidebar-offcanvas {
+                right: -50%; /* 6 columns */
+            }
+
+            .row-offcanvas-left
+            .sidebar-offcanvas {
+                left: -50%; /* 6 columns */
+            }
+
+            .row-offcanvas-right.active {
+                right: 50%; /* 6 columns */
+            }
+
+            .row-offcanvas-left.active {
+                left: 50%; /* 6 columns */
+            }
+
+            .sidebar-offcanvas {
+                position: absolute;
+                top: 0;
+                width: 50%; /* 6 columns */
+            }
+        }
+        .logoutLblPos{
+
+            position:fixed;
+            right:10px;
+            top:5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+<div ng-app="MtaaS" data-ng-controller="MtaaS1">
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" ng-click = "home()">Acumen SIM</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" ng-click = "home()">Home</a></li>
+                    <li class="active"><a href="#" ng-click = "searchsupplier()">Search</a></li>
+                    <li><a href="#" ng-click="processsupplier()">Process</a></li>
+                </ul>
+                <label class="logoutLblPos">
+                    <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+                </label>
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    <div class="container">
+        <div ng-repeat = "p in loginusername">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <label>{{p.suppliername}}</label>
+
+                <div class="col-xs-12 col-sm-9">
+                    <p class="pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                    </p>
+                    <div class="jumbotron">
+                        <h2 color="Red"><b>Process Detail</b></h2>
+
+                        <!--new code added here -->
+                        <div class="container well" style="margin-top: 50px">
+                            <form name="myForm">
+                                <p>Supplier Basic Information</p>
+                                <a name="sbi"></a>
+                                <div class="form-group col-md-12">
+
+
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" type="text" placeholder={{p.suppliername}} name="suppliername" ng-model="suppliername">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" type="email" placeholder={{p.emailaddress}} name="supplieremail" ng-model="supplieremail">
+                                    </div>
+                                    <!--Check if Select List Works
+                                    <tr>
+                                        <td>Legal Structure </td>
+                                        <td><input type="text" name="legal" ng-model="legal"></td>
+
+                                    </tr>
+                                    -->
+
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" type="text" placeholder={{p.legalstructure}} name="legalstructure">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" type="text" placeholder={{p.commodity}} name="commodity">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" name="website" ng-model="website" placeholder={{p.website}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-9">
+                                        <input class="form-control" type="text" placeholder={{p.location}} name="location">
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <p>Supplier Address Information</p>
+
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" name="addressline1" ng-model="addressline1" placeholder={{p.addressline1}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" name="addressline2" ng-model="addressline2" placeholder={{p.addressline2}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" name="city" ng-model="city" placeholder={{p.city}} type="tel">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" name="postcode" ng-model="postcode" placeholder={{p.postcode}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" name="country" ng-model="country" placeholder={{p.country}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" name="state" ng-model="state" placeholder={{p.state}} type="text">
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <!-- Supplier Contact Information -->
+                                    <p>Supplier Primary Contact Information</p>
+
+
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" name="sfirstname" ng-model="sfirstname" placeholder={{p.supplierfirstname}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input class="form-control" name="slastname" ng-model="slastname" placeholder={{p.supplierlastname}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" name="phone" ng-model="phone" placeholder={{p.phone}} type="tel">
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" name="fax" ng-model="fax" placeholder={{p.fax}} type="text">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input class="form-control" name="pemail" ng-model="pemail" placeholder={{p.primaryemail}} type="text">
+                                    </div>
+                                    <!-- Supplier Contact Information Ends Here -->
+                                    <div class="form-group col-md-12">
+
+                                    </div>
+                                    <input type="submit" name="Add Supplier" value = "Approve" class="btn btn-success" ng-click="approvedsupplier1()">
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div></div></div>
+</div>
+</center>
+
+
+
+
+
+<script type ='text/javascript'>	//javascript code
+
+    var app=angular.module('MtaaS', []);
+
+    app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+    {
+        /*
+         $http({
+         method: 'GET',
+         url: '/processdetail'
+
+         }).
+         then(function(response) {
+         //alert(response.data.result);
+         $scope.loginusername = angular.fromJson(response.data.result);
+         });
+         */
+        $scope.approvedsupplier1= function(){
+
+            $http({
+                method: 'POST',
+                url: '/approvedsupplier1',
+                data: {"approval": 'approved'}
+            }).
+            then(function(response) {
+                $window.location.href = '/processsupplier_fmanager';
+            });
+        };
+
+        $http({
+            method: 'GET',
+            url: '/homeusername1'
+
+        }).
+        then(function(response) {
+            //alert(response.data.result);
+            $scope.loginusername = angular.fromJson(response.data.result);
+        });
+
+        $scope.logoutsession= function () {
+            //alert("in logout session");
+            $http({
+                method: 'GET',
+                url: '/logoutsession'
+            }).
+            then(function(response)
+            {
+                if(response.data.status===300)
+                {
+                    console.log("destroy session");
+                }else
+                {
+                    $window.location.href='/';
+                }
+            });
+        };
+        $scope.addsupplier = function (){
+            $window.location.href = '/addsupplier';
+        };
+        $scope.editsupplier = function (){
+            $window.location.href = '/editsupplier';
+        };
+        $scope.updatesupplier = function (){
+            $window.location.href = '/updatesupplier';
+        };
+        $scope.searchsupplier = function (){
+            $window.location.href = '/searchsupplier';
+        };
+        $scope.processsupplier = function (){
+            $window.location.href = '/processsupplier';
+        };
+        $scope.home = function (){
+            $window.location.href = '/home';
+        }
+    }]);
+
+</script>
+</body>
+</html>
