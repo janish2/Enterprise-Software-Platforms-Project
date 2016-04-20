@@ -1,1 +1,33 @@
 
+Acument SIM, Acumen Supplier Information Management is my ESP project developed in ESP course in San Jose State University, Fall 2015. 
+Acumen SIM is an application which is a platform for any organization who can use it for maintaining the supplier details from which they purchase the software/hardware products. 
+This basically helps the organization to get best suppliers. 
+For example, if an organization wants 100 computers, than they can simply use our application
+and select the supplier they want and send it to approval to their Finance & Project manager. Once the approval is done the organization member can 
+order the computers.
+So basically this helps the employee to save lot of time in researching about the suppliers and also get the latest deails in the market.
+
+FEATURES -
+
+1. Supplier details
+2. Separate login page for Finance manager, Project Manager, Employee and Supplier
+3. Dashboard for PRoject manager and Finance manager
+4. List of Suppliers for Employee
+
+TECHNOLOGIES - 
+
+1. Nodejs
+2. Angularjs
+3. Expressjs
+4. HTML
+5. CSS
+6. Bootstrap
+7. MySQL
+
+TOOLS - 
+
+1. Eclipse JEE MArs
+2. Bracckets
+
+
+
